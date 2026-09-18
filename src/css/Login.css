@@ -1,0 +1,172 @@
+* {
+  box-sizing: border-box;
+}
+
+.login-page {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      #0b4052,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      #0b4052,
+      transparent 35%
+    ),
+    #061525;
+}
+
+.login-container {
+  text-align: center;
+}
+
+.login-container h1 {
+  color: #13d5f5;
+  margin-bottom: 5px;
+  font-size: 32px;
+}
+
+.tagline {
+  color: #8a9aaa;
+  font-size: 16px;
+  margin-bottom: 25px;
+}
+
+.login-box {
+  width: 390px;
+  padding: 20px;
+  background: #172333;
+  border: 1px solid #2a3949;
+  border-radius: 7px;
+  text-align: left;
+}
+
+.tabs {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #263442;
+}
+
+.tabs span {
+  width: 50%;
+  text-align: center;
+  padding-bottom: 10px;
+  color: #a5b0bb;
+  font-size: 16px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.tabs span:hover {
+  color: white;
+}
+
+.tabs .active {
+  color: #63dcf6;
+  border-bottom: 2px solid #08d3f5;
+}
+
+label {
+  display: block;
+  color: #aeb9c5;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+
+input {
+  width: 100%;
+  padding: 9px;
+  margin-bottom: 12px;
+  background: #101d35;
+  border: 1px solid #263d5c;
+  border-radius: 5px;
+  color: white;
+  outline: none;
+  font-size: 15px;
+}
+
+input:focus {
+  border-color: #08d3f5;
+}
+
+.password-label {
+  display: flex;
+  justify-content: space-between;
+}
+
+.password-label a {
+  color: #6bb9cf;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+
+.login-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 3px;
+  border: none;
+  border-radius: 5px;
+  background: #08cbed;
+  color: #06202b;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background: #13d5f5;
+}
+
+
+.or {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin: 10px 0;
+}
+
+.or span {
+  height: 1px;
+  flex: 1;
+
+  background: #263442;
+}
+
+.or p {
+  color: #8a969f;
+  font-size: 12px;
+}
+
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px;
+  background: #243247;
+  border: none;
+  border-radius: 5px;
+  color: white;
+
+  cursor: pointer;
+}
+
+.google-btn:hover {
+  background: #2b3a50;
+}
+
+.google-btn img {
+  width: 16px;
+  height: 16px;
+}

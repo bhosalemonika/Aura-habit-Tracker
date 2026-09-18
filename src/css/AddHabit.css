@@ -1,0 +1,320 @@
+.habit-page {
+  width: 100%;
+  min-height: 100%;
+  padding: 30px 6%;
+  box-sizing: border-box;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.page-header h1 {
+  margin: 0 0 8px;
+  font-size: 34px;
+  font-weight: 700;
+  color: #e0e5e9;
+}
+
+.page-header p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #a8b2bb;
+}
+
+.habit-form {
+  width: 100%;
+  max-width: 830px;
+  margin: 0 auto;
+  padding: 38px 33px 30px;
+  box-sizing: border-box;
+  background: #111c2d;
+  border: 1px solid #294568;
+  border-radius: 11px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.field-full {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.field label {
+  margin-bottom: 9px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  color: #a8d8ed;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: #151e28;
+  border: 1px solid #263645;
+  border-radius: 7px;
+  padding: 12px 13px;
+  color: #cdd4da;
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+}
+
+.field input {
+  height: 41px;
+}
+
+.field textarea {
+  height: 82px;
+  resize: vertical;
+  min-height: 82px;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: #4acff0;
+}
+
+.field select {
+  height: 41px;
+  cursor: pointer;
+}
+
+.field-row {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.segmented-options {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  min-height: 41px;
+}
+
+.segment {
+  padding: 7px 15px;
+  border: 1px solid #293b4c;
+  border-radius: 18px;
+  background: transparent;
+  color: #aeb8c1;
+  cursor: pointer;
+  font-size: 11px;
+  white-space: nowrap;
+  transition: 0.2s ease;
+}
+
+.segment:hover {
+  border-color: #4acff0;
+  color: #bcefff;
+}
+
+.segment.active {
+  border-color: #6eddfb;
+  color: #bcefff;
+  background: #193343;
+  box-shadow: 0 0 12px rgba(54, 204, 242, 0.2);
+}
+
+.icon-picker {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  min-height: 61px;
+  padding: 7px 12px;
+  box-sizing: border-box;
+  border: 1px solid #263747;
+  border-radius: 10px;
+  background: #151f29;
+}
+
+.icon-option {
+  width: 35px;
+  height: 35px;
+  flex: 0 0 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #293a4a;
+  border-radius: 7px;
+  background: #17212b;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.icon-option:hover {
+  border-color: #4acff0;
+}
+
+.icon-option img {
+  width: 19px;
+  height: 19px;
+  object-fit: contain;
+}
+
+.icon-option.selected {
+  border-color: #6eddfb;
+  box-shadow: 0 0 13px rgba(54, 204, 242, 0.3);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 28px;
+  margin-top: 37px;
+}
+
+.secondary-btn {
+  border: none;
+  background: transparent;
+  color: #b3bdc5;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.secondary-btn:hover {
+  color: #ffffff;
+}
+
+.primary-btn {
+  min-width: 135px;
+  height: 40px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 7px;
+  background: #13c8ec;
+  color: #06202a;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 0 18px rgba(19, 200, 236, 0.3);
+  transition: 0.2s ease;
+}
+
+.primary-btn:hover {
+  background: #25d2f2;
+}
+
+@media (max-width: 900px) {
+  .habit-page {
+    padding: 28px 30px;
+  }
+
+  .habit-form {
+    max-width: 100%;
+    padding: 32px 28px 28px;
+  }
+
+  .page-header h1 {
+    font-size: 30px;
+  }
+
+  .field-row {
+    gap: 18px;
+  }
+}
+
+@media (max-width: 650px) {
+  .habit-page {
+    padding: 24px 16px;
+  }
+
+  .page-header {
+    margin-bottom: 22px;
+  }
+
+  .page-header h1 {
+    font-size: 26px;
+  }
+
+  .page-header p {
+    font-size: 13px;
+    padding: 0 10px;
+  }
+
+  .habit-form {
+    padding: 25px 18px 22px;
+    border-radius: 10px;
+  }
+
+  .field-row {
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 22px;
+  }
+
+  .field-full {
+    margin-bottom: 22px;
+  }
+
+  .segmented-options {
+    min-height: auto;
+  }
+
+  .segment {
+    padding: 8px 14px;
+  }
+
+  .icon-picker {
+    gap: 9px;
+    padding: 9px;
+    min-height: 58px;
+  }
+
+  .form-actions {
+    justify-content: flex-end;
+    gap: 20px;
+    margin-top: 30px;
+  }
+
+  .primary-btn {
+    min-width: 125px;
+  }
+}
+
+@media (max-width: 400px) {
+  .habit-page {
+    padding: 20px 10px;
+  }
+
+  .page-header h1 {
+    font-size: 23px;
+  }
+
+  .page-header p {
+    font-size: 12px;
+  }
+
+  .habit-form {
+    padding: 22px 14px 20px;
+  }
+
+  .field label {
+    font-size: 10px;
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    font-size: 13px;
+  }
+
+  .segment {
+    padding: 7px 11px;
+    font-size: 10px;
+  }
+}

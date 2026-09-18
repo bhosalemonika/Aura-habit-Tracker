@@ -1,0 +1,287 @@
+* {
+  box-sizing: border-box;
+}
+
+.onboarding {
+  min-height: 100vh;
+  height: 100vh;
+  padding-top: 1px;
+  color: #dce6ef;
+  background:
+    radial-gradient(circle at 18% 95%, rgba(5, 74, 94, 0.55), transparent 34%),
+    radial-gradient(circle at 98% 0%, rgba(4, 69, 86, 0.42), transparent 30%),
+    #061221;
+  overflow: hidden;
+}
+
+.brand {
+  margin-top: 10px;
+  padding: 10px 12px;
+  color: #13d5f5;
+  font-size: 18px;
+  line-height: 18px;
+  text-align: left;
+}
+
+.content {
+  position: relative;
+  width: min(calc(100% - 32px), 600px);
+  height: calc(100vh - 43px);
+  margin: 25px auto 0;
+}
+
+.progress {
+  width: 210px;
+  height: 28px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #203747;
+  color: #13d5f5;
+  font-size: 17px;
+  line-height: 12px;
+  text-align: left;
+}
+
+.progress span {
+  color: #738895;
+  font-size: 19px;
+}
+
+.content h1 {
+  margin: 14px 0 22px;
+  color: #dce6ef;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 28px;
+  text-align: left;
+}
+.options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.options button {
+  min-width: 90px;
+  height: 38px;
+  padding: 6px 12px;
+  border: 1px solid #20364e;
+  border-radius: 8px;
+  color: #9aabb9;
+  background: #0c1b2e;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.options button:hover,
+.options button.selected {
+  border-color: #08cbed;
+  color: white;
+  background: #0a3043;
+}
+
+.options button:has(small) {
+  width: 90px;
+  height: 55px;
+  padding: 6px;
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.options small {
+  display: block;
+  color: #718594;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.options button:nth-child(1),
+.options button:nth-child(2),
+.options button:nth-child(3),
+.options button:nth-child(4) {
+  min-width: 0;
+}
+
+.options button:nth-child(5) {
+  min-width: 0;
+}
+
+
+
+.options button:has(small)::before {
+  content: "";
+}
+
+.habit-options button:has(small) {
+  width: calc((100% - 16px) / 3);
+}
+
+.options small,
+.reminder small {
+  display: block;
+  margin-top: 0;
+  padding-top: 0;
+  color: #718594;
+  font-size: 12px;
+  line-height: 11px;
+}
+
+.goal-options {
+  width: 100%;
+  gap: 12px;
+}
+
+.goal-options button {
+  height: 60px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 25px;
+  border-radius: 28px;
+  font-size: 18px;
+  line-height: 1;
+  white-space: nowrap;
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+.goal-options button img {
+  width: 19px;
+  height: 19px;
+  flex: 0 0 19px;
+}
+
+.content:has(.goal-options) {
+  width: min(calc(100% - 32px), 600px);
+}
+
+
+
+.reminder {
+  width: min(100%, 360px);
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #20364e;
+  border-radius: 6px;
+  color: #9aabb9;
+  font-size: 13px;
+}
+
+.reminder input {
+  width: 120px;
+  height: 20px;
+  border: 0;
+  color: #b7eaf3;
+  background: #10283a;
+  font-size: 11px;
+}
+
+
+.actions {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 308px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.previous,
+.next {
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.previous {
+  padding: 0;
+  color: #a2b2bc;
+  background: transparent;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.previous:disabled {
+  visibility: hidden;
+}
+
+.next {
+  min-width: 82px;
+  height: 37px;
+  padding: 3px 10px;
+  color: #06202b;
+  background: #08cbed;
+  font-size: 16px;
+  font-weight: 400;
+  border-radius: 6px;
+}
+
+@media (max-width: 600px) {
+
+  .goal-options {
+    gap: 6px;
+  }
+
+  .goal-options button {
+    height: 42px;
+    gap: 5px;
+    padding: 0 10px;
+    font-size: 14px;
+  }
+
+  .goal-options button img {
+    width: 14px;
+    height: 14px;
+    flex-basis: 14px;
+  }
+
+  .goal-options button:nth-child(1) {
+    min-width: 91px;
+  }
+
+  .goal-options button:nth-child(2) {
+    min-width: 84px;
+  }
+
+  .goal-options button:nth-child(3) {
+    min-width: 112px;
+  }
+
+  .goal-options button:nth-child(4) {
+    min-width: 86px;
+  }
+
+  .goal-options button:nth-child(5) {
+    min-width: 90px;
+  }
+
+  .content {
+    margin-top: 25px;
+  }
+
+  .goal-options button {
+    flex: 1 1 auto;
+  }
+
+  .habit-options {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 420px) {
+  .goal-options button {
+    min-width: 0;
+    flex: 1 1 calc(50% - 6px);
+    padding: 0 8px;
+    font-size: 12px;
+  }
+
+  .goal-options button:nth-child(5) {
+    flex-basis: 70%;
+  }
+}
