@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { normalizeEmail, readUser } from "../utils/userSession";
 
 const questions = [
   {
@@ -16,15 +17,16 @@ const questions = [
 
 export function useOnboarding() {
   const navigate = useNavigate();
+  const onboardingKey = `auraOnboarding:${normalizeEmail(readUser().email)}`;
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState(
-    JSON.parse(localStorage.getItem("auraOnboarding")) || {}
+    JSON.parse(localStorage.getItem(onboardingKey)) || {}
   );
 
   const saveAnswer = (key, value) => {
     const updatedAnswers = { ...answers, [key]: value };
     setAnswers(updatedAnswers);
-    localStorage.setItem("auraOnboarding", JSON.stringify(updatedAnswers));
+    localStorage.setItem(onboardingKey, JSON.stringify(updatedAnswers));
   };
   const next = () => step === 2 ? navigate("/dashboard") : setStep(step + 1);
   const previous = () => step > 0 && setStep(step - 1);

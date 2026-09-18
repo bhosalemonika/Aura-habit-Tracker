@@ -41,7 +41,7 @@
 }
 
 .login-box {
-  width: 390px;
+  width: min(390px, calc(100vw - 32px));
   padding: 20px;
   background: #172333;
   border: 1px solid #2a3949;
@@ -169,4 +169,20 @@ input:focus {
 .google-btn img {
   width: 16px;
   height: 16px;
+}
+
+@media (max-width: 480px) {
+  .login-page {
+    min-height: 100vh;
+    height: auto;
+    padding: 24px 0;
+  }
+
+  .login-container h1 {
+    font-size: 28px;
+  }
+
+  .login-box {
+    padding: 16px;
+  }
 }

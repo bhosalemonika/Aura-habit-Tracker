@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { registerUser } from "../utils/userSession";
 
 function SignupForm({ onLogin }) {
   const [name, setName] = useState("");
@@ -7,7 +8,12 @@ function SignupForm({ onLogin }) {
 
   function handleSignup(event) {
     event.preventDefault();
-    localStorage.setItem("auraUser", JSON.stringify({ name, email, password }));
+    const result = registerUser({ name: name.trim(), email, password });
+    if (!result.ok) {
+      alert(result.error);
+      return;
+    }
+    localStorage.setItem("auraEmail", result.user.email);
     alert("Account created successfully!");
     onLogin();
   }

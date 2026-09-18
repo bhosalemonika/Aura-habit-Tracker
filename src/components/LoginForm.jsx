@@ -1,24 +1,28 @@
 import { useState } from "react";
 import googleIcon from "../assets/images/SVG.png";
 import { useNavigate } from "react-router-dom";
+import { findUser, setUserSession } from "../utils/userSession";
+import { useDispatch } from "react-redux";
+import { hydrateHabits } from "../store/habitsSlice";
 
 function LoginForm() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState(localStorage.getItem("auraEmail") || "");
   const [password, setPassword] = useState("");
 
   function handleLogin(event) {
     event.preventDefault();
-    const savedUser = JSON.parse(localStorage.getItem("auraUser"));
+    const savedUser = findUser(email, password);
 
     if (!savedUser) {
       alert("Please Sign Up first.");
       return;
     }
 
-    if (email === savedUser.email && password === savedUser.password) {
-      localStorage.setItem("auraEmail", savedUser.email);
-      localStorage.setItem("auraName", savedUser.name);
+    if (savedUser) {
+      setUserSession(savedUser);
+      dispatch(hydrateHabits(savedUser.email));
       navigate("/onboarding");
       return;
     }

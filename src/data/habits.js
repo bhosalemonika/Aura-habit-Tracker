@@ -1,3 +1,5 @@
+import { normalizeEmail } from "../utils/userSession";
+
 const HABITS_KEY = "auraHabits";
 export const defaultHabits = [
   {
@@ -14,19 +16,33 @@ export const defaultHabits = [
   }
 ];
 
-export function loadHabits() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(HABITS_KEY));
-    return Array.isArray(saved) && saved.length > 0 ? saved : defaultHabits;
-  } catch {
-    localStorage.removeItem(HABITS_KEY);
-  }
-
-  return defaultHabits;
+function getHabitsKey(email) {
+  return `${HABITS_KEY}:${normalizeEmail(email)}`;
 }
 
-export function saveHabits(habits) {
-  localStorage.setItem(HABITS_KEY, JSON.stringify(habits));
+export function loadHabits(email = "") {
+  try {
+    const saved = JSON.parse(localStorage.getItem(getHabitsKey(email)));
+    if (Array.isArray(saved)) {
+      return saved;
+    }
+
+    // Migrate the original single-user data only for the account that owned it.
+    const legacyUser = JSON.parse(localStorage.getItem("auraUser"));
+    const legacyHabits = JSON.parse(localStorage.getItem(HABITS_KEY));
+    if (normalizeEmail(legacyUser?.email) === normalizeEmail(email) && Array.isArray(legacyHabits)) {
+      localStorage.setItem(getHabitsKey(email), JSON.stringify(legacyHabits));
+      return legacyHabits;
+    }
+  } catch {
+    localStorage.removeItem(getHabitsKey(email));
+  }
+
+  return defaultHabits.map((habit) => ({ ...habit }));
+}
+
+export function saveHabits(habits, email = "") {
+  localStorage.setItem(getHabitsKey(email), JSON.stringify(habits));
   return habits;
 }
 
