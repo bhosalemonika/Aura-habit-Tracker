@@ -3,7 +3,7 @@ import settingIcon from "../../assets/icons/setting.png";
 import notificationIcon from "../../assets/icons/notif.png";
 import streakIcon from "../../assets/icons/streak.png";
 
-function TopBar({ streak, openHome, openCalendar, openProfile, openAchievements }) {
+function TopBar({ streak, openHome, openNotifications, openSettings, openProfile, openAchievements }) {
   return (
     <header className="topbar">
       <button className="topbar-brand" type="button" onClick={openHome}>
@@ -16,11 +16,11 @@ function TopBar({ streak, openHome, openCalendar, openProfile, openAchievements 
           {streak} Day Streak
         </button>
 
-        <button className="top-icon" type="button" aria-label="Open calendar" onClick={openCalendar}>
+        <button className="top-icon" type="button" aria-label="Open notifications" onClick={openNotifications}>
           <img src={notificationIcon} alt="" />
         </button>
 
-        <button className="top-icon" type="button" aria-label="Open settings" onClick={openProfile}>
+        <button className="top-icon" type="button" aria-label="Open settings" onClick={openSettings}>
           <img src={settingIcon} alt="" />
         </button>
 

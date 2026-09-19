@@ -9,6 +9,8 @@ import QuoteCard from "../components/dashboard/QuoteCard";
 import CalendarPage from "../components/dashboard/CalendarPage";
 import AchievementsPage from "../components/dashboard/AchievementsPage";
 import ProfilePage from "../components/dashboard/ProfilePage";
+import NotificationSettings from "../components/dashboard/profile/NotificationSettings";
+import SettingsPage from "./SettingsPage";
 import AddHabit from "./AddHabit";
 import MyHabits from "./MyHabits";
 import { useHabits } from "../hooks/useHabits";
@@ -18,6 +20,12 @@ import { readUser } from "../utils/userSession";
 function Dashboard() {
   const [activePage, setActivePage] = useState("home");
   const [editHabit, setEditHabit] = useState(null);
+  const [notifications, setNotifications] = useState({
+    habitAdded: true,
+    dailyReminders: true,
+    streakMilestones: true,
+    weeklySummary: false
+  });
   const {
     habits,
     completeHabit,
@@ -41,8 +49,29 @@ function Dashboard() {
     setActivePage("add-habit");
   };
 
+  const openNotifications = () => {
+    setEditHabit(null);
+    setActivePage("notifications");
+  };
+
+  const openSettings = () => {
+    setEditHabit(null);
+    setActivePage("settings");
+  };
+
+  const toggleNotification = (key) => {
+    setNotifications((current) => ({
+      ...current,
+      [key]: !current[key]
+    }));
+  };
+
   const saveHabit = (habit) => {
     persistHabit(habit);
+    setNotifications((current) => ({
+      ...current,
+      habitAdded: true
+    }));
     openPage("my-habits");
   };
 
@@ -52,6 +81,8 @@ function Dashboard() {
         streak={longestStreak}
         openHome={() => openPage("home")}
         openCalendar={() => openPage("calendar")}
+        openNotifications={openNotifications}
+        openSettings={openSettings}
         openProfile={() => openPage("profile")}
         openAchievements={() => openPage("achievements")}
       />
@@ -104,6 +135,18 @@ function Dashboard() {
 
           {activePage === "calendar" && <CalendarPage habits={habits} />}
 
+          {activePage === "notifications" && (
+            <section className="simple-page notification-page">
+              <h1>Notifications</h1>
+              <p>Manage the reminders you want to receive.</p>
+              <NotificationSettings
+                notifications={notifications}
+                onToggle={toggleNotification}
+                variant="page"
+              />
+            </section>
+          )}
+
           {activePage === "achievements" && (
             <AchievementsPage
               completedCount={completedCount}
@@ -111,6 +154,8 @@ function Dashboard() {
               totalCount={habits.length}
             />
           )}
+
+          {activePage === "settings" && <SettingsPage />}
 
           {activePage === "profile" && (
             <ProfilePage
