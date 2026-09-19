@@ -11,7 +11,7 @@ function getMonthDates(date) {
   startDate.setDate(firstDay.getDate() - firstDay.getDay());
 
   const days = [];
-  for (let index = 0; index < 42; index += 1) {
+  for (let index = 0; index < 32; index += 1) {
     const current = new Date(startDate);
     current.setDate(startDate.getDate() + index);
     days.push(current);
@@ -42,6 +42,64 @@ function getHabitDate(habit, monthDate) {
   const seed = [...habit.name].reduce((total, character) => total + character.charCodeAt(0), 0);
   const fallbackDay = 1 + (seed % daysInMonth);
   return new Date(year, month, fallbackDay);
+}
+
+function HabitPill({ habit, dateKey }) {
+  const shortName = habit.name.length > 10 ? `${habit.name.slice(0, 10)}…` : habit.name;
+
+  return (
+    <span className="habit-pill" key={`${dateKey}-${habit.id}`} title={habit.name}>
+      {shortName}
+    </span>
+  );
+}
+
+function CalendarDay({ date, dateKey, isCurrentMonth, isSelected, isToday, dayHabits, onSelectDate }) {
+  return (
+    <button
+      key={dateKey + date.getTime()}
+      type="button"
+      className={`calendar-day compact-day ${isCurrentMonth ? "current-month" : "other-month"} ${isSelected ? "selected" : ""} ${isToday ? "today" : ""}`}
+      onClick={() => onSelectDate(date)}
+    >
+      <span className="calendar-day-number">{date.getDate()}</span>
+      <div className="calendar-day-habits compact-habits">
+        {dayHabits.slice(0, 1).map((habit) => (
+          <HabitPill key={`${dateKey}-${habit.id}`} habit={habit} dateKey={dateKey} />
+        ))}
+        {dayHabits.length > 1 && (
+          <span className="habit-pill more">+{dayHabits.length - 1}</span>
+        )}
+      </div>
+    </button>
+  );
+}
+
+function SelectedDayPanel({ selectedDate, selectedHabits }) {
+  const selectedKey = selectedDate.toDateString();
+
+  return (
+    <aside className="calendar-side-panel compact-side-panel">
+      <h2>{selectedDate.toLocaleDateString("en-US", { month: "short", day: "numeric" })}</h2>
+      <div className="calendar-side-list compact-side-list">
+        {selectedHabits.length > 0 ? (
+          selectedHabits.map((habit) => (
+            <div className="calendar-side-item compact-side-item" key={`${selectedKey}-${habit.id}`}>
+              <div>
+                <strong>{habit.name}</strong>
+                <small>{habit.category}</small>
+              </div>
+              <span>{habit.reminderTime || "Anytime"}</span>
+            </div>
+          ))
+        ) : (
+          <div className="calendar-empty-state">
+            <span>No habits scheduled</span>
+          </div>
+        )}
+      </div>
+    </aside>
+  );
 }
 
 function CalendarPage({ habits }) {
@@ -92,53 +150,22 @@ function CalendarPage({ habits }) {
               const isToday = date.toDateString() === today.toDateString();
 
               return (
-                <button
+                <CalendarDay
                   key={dateKey + date.getTime()}
-                  type="button"
-                  className={`calendar-day compact-day ${isCurrentMonth ? "current-month" : "other-month"} ${isSelected ? "selected" : ""} ${isToday ? "today" : ""}`}
-                  onClick={() => setSelectedDate(date)}
-                >
-                  <span className="calendar-day-number">{date.getDate()}</span>
-                  <div className="calendar-day-habits compact-habits">
-                    {dayHabits.slice(0, 1).map((habit) => {
-                      const shortName = habit.name.length > 10 ? `${habit.name.slice(0, 10)}…` : habit.name;
-
-                      return (
-                        <span className="habit-pill" key={`${dateKey}-${habit.id}`} title={habit.name}>
-                          {shortName}
-                        </span>
-                      );
-                    })}
-                    {dayHabits.length > 1 && (
-                      <span className="habit-pill more">+{dayHabits.length - 1}</span>
-                    )}
-                  </div>
-                </button>
+                  date={date}
+                  dateKey={dateKey}
+                  isCurrentMonth={isCurrentMonth}
+                  isSelected={isSelected}
+                  isToday={isToday}
+                  dayHabits={dayHabits}
+                  onSelectDate={setSelectedDate}
+                />
               );
             })}
           </div>
         </div>
 
-        <aside className="calendar-side-panel compact-side-panel">
-          <h2>{selectedDate.toLocaleDateString("en-US", { month: "short", day: "numeric" })}</h2>
-          <div className="calendar-side-list compact-side-list">
-            {selectedHabits.length > 0 ? (
-              selectedHabits.map((habit) => (
-                <div className="calendar-side-item compact-side-item" key={`${selectedKey}-${habit.id}`}>
-                  <div>
-                    <strong>{habit.name}</strong>
-                    <small>{habit.category}</small>
-                  </div>
-                  <span>{habit.reminderTime || "Anytime"}</span>
-                </div>
-              ))
-            ) : (
-              <div className="calendar-empty-state">
-                <span>No habits scheduled</span>
-              </div>
-            )}
-          </div>
-        </aside>
+        <SelectedDayPanel selectedDate={selectedDate} selectedHabits={selectedHabits} />
       </div>
     </section>
   );

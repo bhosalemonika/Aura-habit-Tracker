@@ -32,28 +32,19 @@ function NotificationSettings({ notifications, onToggle, variant = "settings" })
 
   if (isStandalone) {
     const enabledCount = Object.values(notifications).filter(Boolean).length;
-    const totalCount = notificationItems.length;
+    const disabledCount = notificationItems.length - enabledCount;
 
     return (
-      <section className="notification-page-card">
+      <section className="notification-page-card simple-notification-page">
         <div className="notification-page-header">
           <div>
             <p className="notification-kicker">Alerts</p>
-            <h2>Notification Center</h2>
+            <h2>Notifications</h2>
           </div>
-          <button type="button" className="notification-action-button">
-            Mark all read
-          </button>
-        </div>
 
-        <div className="notification-summary">
-          <div className="notification-summary-item">
-            <span>{enabledCount}</span>
-            <small>Enabled</small>
-          </div>
-          <div className="notification-summary-item muted">
-            <span>{totalCount - enabledCount}</span>
-            <small>Paused</small>
+          <div className="notification-status-group">
+            <span className="notification-status active">{enabledCount} on</span>
+            <span className="notification-status muted">{disabledCount} off</span>
           </div>
         </div>
 
@@ -66,6 +57,9 @@ function NotificationSettings({ notifications, onToggle, variant = "settings" })
                   <span className="notification-timing">{timing}</span>
                 </div>
                 <small>{description}</small>
+                <span className={`notification-state ${notifications[key] ? "enabled" : "disabled"}`}>
+                  {notifications[key] ? "On" : "Off"}
+                </span>
               </div>
 
               <div className="notification-toggle-wrap">
